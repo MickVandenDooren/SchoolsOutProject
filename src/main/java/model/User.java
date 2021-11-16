@@ -1,17 +1,16 @@
 package model;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class User {
 
     @Id
     private String login;
-
     private String passwordHash;
-    private Boolean active;
-
-    @OneToOne
+    private boolean active;
+    @OneToOne(cascade = CascadeType.ALL)
     private Person person;
 
     public String getLogin() {

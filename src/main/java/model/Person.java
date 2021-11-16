@@ -6,18 +6,20 @@ import javax.persistence.*;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
 
     private String firstName;
     private String familyName;
 
-    @Enumerated
+    @Enumerated(value =  EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     private Course course;
 
+    public Person() {
+    }
 
     public Integer getId() {
         return id;

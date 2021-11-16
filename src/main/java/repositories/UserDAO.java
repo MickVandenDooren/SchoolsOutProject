@@ -18,17 +18,14 @@ public class UserDAO {
         EntityManager em = EMF.getEMF().createEntityManager();
         List<User> users = em.createQuery("Select u from User u").getResultList();
         return users;
-
-
     }
 
 
-    public void createUser (User user){
+    public static void createUser(User user){
         EntityManager em = EMF.getEMF().createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
-
     }
 
     public void updateUser(User user){
@@ -36,7 +33,6 @@ public class UserDAO {
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();
-
     }
 
 
@@ -44,8 +40,7 @@ public class UserDAO {
         EntityManager em = EMF.getEMF().createEntityManager();
         em.getTransaction().begin();
         User foundUser = em.find(User.class,user.getLogin());
-        em.remove(user);
+        em.remove(foundUser);
         em.getTransaction().commit();
-
     }
 }

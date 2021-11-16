@@ -7,7 +7,7 @@ import java.util.List;
 public class Module {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     private String name;
@@ -15,10 +15,10 @@ public class Module {
     @Column(length = 2000)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     private Course course;
 
-    @OneToMany
+    @OneToMany(mappedBy = "module", cascade = CascadeType.DETACH)
     private List<Exam> exams;
 
     public Long getId() {

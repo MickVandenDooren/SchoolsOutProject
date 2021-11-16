@@ -2,12 +2,13 @@ package model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
 public class Exam {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     private String name;
@@ -22,6 +23,10 @@ public class Exam {
     @ManyToOne
     private Module module;
 
+    @ManyToOne
+    private Exam examGroup;
+    @OneToMany (mappedBy = "examGroup",cascade = CascadeType.REMOVE)
+    private List<Exam> subExams;
 
     public Long getId() {
         return id;
@@ -84,6 +89,19 @@ public class Exam {
     public Exam setModule(Module module) {
         this.module = module;
         return this;
+    }
+
+
+    public Exam getExamGroup() {
+        return examGroup;
+    }
+
+    public void setExamGroup(Exam examGroup) {
+        this.examGroup = examGroup;
+    }
+
+    public List<Exam> getSubExams() {
+        return subExams;
     }
 
 

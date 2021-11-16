@@ -10,7 +10,6 @@ public class ExamDAO {
     public Exam findExamById(Long Id){
         EntityManager em = EMF.getEMF().createEntityManager();
         return em.find(Exam.class,Id);
-
     }
 
     public List<Exam> getAllExams(){

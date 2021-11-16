@@ -18,7 +18,7 @@ public class Course {
     private String imageURL;
     private Boolean active;
 
-    @OneToMany
+    @OneToMany(mappedBy = "course")
     private List<Module> modules;
 
     public Long getId() {
