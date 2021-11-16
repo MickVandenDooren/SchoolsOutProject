@@ -42,13 +42,18 @@ public class GradeService {
                         }
                 } else System.out.println("No exams found.");
                 int choice = scanner.nextInt();
+
                 Exam examToBeGraded = gradeable.get(choice - 1);
                 Grade grade = new Grade();
+
                 grade.setPerson(person);
                 grade.setExam(examToBeGraded);
                 grade.setDate(LocalDate.now());
+
+
                 boolean correctGradeValue = false;
                 BigDecimal gradeValue = null;
+                //Check for valid input
                 while (!correctGradeValue) {
                         System.out.print("Enter grade: ");
                         gradeValue = scanner.nextBigDecimal();
@@ -60,10 +65,14 @@ public class GradeService {
                 }
                 grade.setGradeValue(gradeValue);
                 scanner.nextLine();
+
+
+
                 System.out.println("Enter comment:");
                 grade.setComment(scanner.nextLine());
                 System.out.println("Enter the internal comment:");
                 grade.setInternalComment(scanner.nextLine());
+
 
                 System.out.print("Absence? Y/N: ");
                 String answer = scanner.nextLine();
@@ -85,6 +94,7 @@ public class GradeService {
                 System.out.print("Enter the id of the grade: ");
                 Long gradeId = Long.valueOf(scanner.next());
                 Grade grade = gradeDAO.getGradeById(gradeId);
+
                 if (grade != null) {
                         System.out.println("Grade for exam {" + grade.getExam().getName() + "} is: " + grade.getGradeValue() + "/" + grade.getExam().getTotal());
                 } else System.out.println("No grade found for id.");
@@ -97,6 +107,8 @@ public class GradeService {
                 User user = userService.PickUser();
                 List<Grade> allGradesPerson = new ArrayList<>();
                 List<Grade> allGrades = gradeDAO.getAllGrades();
+
+                //Check if not null
                 if (user != null) {
                         int counter = 1;
                         Person person = user.getPerson();
@@ -130,6 +142,8 @@ public class GradeService {
         //de grade mag niet minder dan 0 zijn, en mag niet meer zijn dan de punten van het examen
         public void updateGrade() {
                 User user = userService.PickUser();
+
+                //Check if not null
                 if (user != null) {
                         Person person = user.getPerson();
                         String fullName = person.getFirstName() + " " + person.getFamilyName();
