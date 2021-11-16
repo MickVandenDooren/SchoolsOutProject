@@ -14,10 +14,10 @@ public class ExamService {
 
     public void outputExam(Long id) {
         Exam exam = examDAO.findExamById(id);
-        printGradeForExamWithoutSubExams(exam);
+        printGrade(exam);
     }
 
-    private void printGradeForExamWithoutSubExams(Exam exam) {
+    private void printGrade(Exam exam) {
         List<Grade> listOfAllGrades = gradeDAO.getAllGrades();
 
         //check exam for sub-exams
@@ -37,7 +37,7 @@ public class ExamService {
             System.out.println(exam.getName() + " is a parent exam.");
             List<Exam> listOfSubExams = exam.getSubExams();
             for (Exam subExam : listOfSubExams) {
-                printGradeForExamWithoutSubExams(subExam);
+                printGrade(subExam);
             }
 
         }
