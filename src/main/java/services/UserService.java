@@ -172,6 +172,10 @@ public class UserService {
 
     }
 
-    //----
-    //extra private methodes hieronder
+    public User PickUser(){
+        getAllUsers();
+        System.out.println("Enter login of the user:");
+        String login = scanner.next();
+        return userDAO.findUserByLogin(login);
+    }
 }

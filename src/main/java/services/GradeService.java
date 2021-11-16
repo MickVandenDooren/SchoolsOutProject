@@ -27,7 +27,8 @@ public class GradeService {
         //de grade mag niet minder dan 0 zijn, en mag niet meer zijn dan de punten van het examen
         //Je gaat een Exam moeten oproepen van de bestaande lijst van examens, Eman mag dus niet op null staan
         //Je gaat een Person moeten terugvinden met User
-        public void createGrade(User user) {
+        public void createGrade() {
+                User user = userService.PickUser();
                 Person person = user.getPerson();
                 String fullName = person.getFirstName() + " " + person.getFamilyName();
                 List<Exam> gradeable = examService.gradeableExams();
@@ -92,7 +93,8 @@ public class GradeService {
         //MEDIUM
         //Controleer eerst of de user niet 'null' is
         //Gebruik een user.getPerson methode, en maak een extra methode in je DAO/repository om resultaten op te vragen met person
-        public List getAllGradeByPerson(User user) {
+        public List getAllGradeByPerson() {
+                User user = userService.PickUser();
                 List<Grade> allGradesPerson = new ArrayList<>();
                 List<Grade> allGrades = gradeDAO.getAllGrades();
                 if (user != null) {
@@ -126,7 +128,8 @@ public class GradeService {
         //vraag alle grades op van een Person en kies de Grade die je wilt aanpassen
         //Enkel de gradeValue en de comment mogen aangepast worden
         //de grade mag niet minder dan 0 zijn, en mag niet meer zijn dan de punten van het examen
-        public void updateGrade(User user) {
+        public void updateGrade() {
+                User user = userService.PickUser();
                 if (user != null) {
                         Person person = user.getPerson();
                         String fullName = person.getFirstName() + " " + person.getFamilyName();
@@ -171,16 +174,17 @@ public class GradeService {
         //EASY
         //Controleer eerst of de user niet 'null' is
         //vraag alle grades op van een Person en kies de Grade die je wilt aanpassen
-        public void deleteGrade(User user) {
+        public void deleteGrade() {
+                User user = userService.PickUser();
                 if (user != null) {
-                        List gradesOfPerson = getAllGradeByPerson(user);
+                        List<Grade> gradesOfPerson = getAllGradeByPerson();
                         Person person = user.getPerson();
                         String fullName = person.getFirstName() + " " + person.getFamilyName();
                         System.out.println("Enter the grade you want to delete of " + fullName);
                         int choice = scanner.nextInt();
 
-                        Grade gradeToBeDeleted = (Grade) gradesOfPerson.get(choice - 1);
-                        System.out.print("Confirm you want to delete this grade: Exam {" + gradeToBeDeleted.getExam().getName() + "} with grade: " + gradeToBeDeleted.getGradeValue() + "/" + gradeToBeDeleted.getExam().getTotal() + "? Y/N: ");
+                       Grade gradeToBeDeleted = gradesOfPerson.get(choice - 1);
+                       System.out.print("Confirm you want to delete this grade: Exam {" + gradeToBeDeleted.getExam().getName() + "} with grade: " + gradeToBeDeleted.getGradeValue() + "/" + gradeToBeDeleted.getExam().getTotal() + "? Y/N: ");
                         scanner.nextLine();
                         String answer = scanner.nextLine();
                         if (answer.equals("Y")) {

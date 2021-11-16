@@ -104,11 +104,11 @@ public class Main {
 
                     } else if (choiceOne==2){
                         switch (choiceTwo){
-                            case 1:gradeService.getAllGradeByPerson(user);break;//see All
+                            case 1:gradeService.getAllGradeByPerson();break;//see All
                             case 2:gradeService.getOneGradeById();break;//see One
-                            case 3:gradeService.createGrade(user);break;//add One
-                            case 4:gradeService.updateGrade(user);break;//edit One
-                            case 5:gradeService.deleteGrade(user);break;//delete One
+                            case 3:gradeService.createGrade();break;//add One
+                            case 4:gradeService.updateGrade();break;//edit One
+                            case 5:gradeService.deleteGrade();break;//delete One
                         }
                         System.out.println("We did a grade thing!");
 
